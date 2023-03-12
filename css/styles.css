@@ -9,6 +9,7 @@
     --color-footer-text-and-button-border: #E7E9FC;
     --color-icon-hover: #31D0AA;
     --color-icon-customers: #8E8F99;
+    --color-modal: #FCFCFC;
 }
 
 body {
@@ -83,7 +84,6 @@ img {
     max-width: 100%;
     height: auto;
 }
-
 .navigation {
     color: var(--color-secondary);
     text-decoration: none;
@@ -93,10 +93,26 @@ img {
     letter-spacing: 0.02em;
     padding: 24px 0;
     display: block;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 .navigation:hover,
 .navigation:focus {
     color: var(--color-button-action);
+}
+.line {
+    color: var(--color-button-action);
+}
+.line::after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1px;
+    width: 100%;
+    height: 4px;
+    left: 0px;
+    background-color: currentColor;
+    border-radius: 2px;
 }
  
 .navigation-mail {
@@ -106,6 +122,8 @@ img {
     letter-spacing: 0.02em;
     padding: 24px 0;
     display: block;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    
 }
 .navigation-mail:hover,
 .navigation-mail:focus {
@@ -119,6 +137,7 @@ img {
     letter-spacing: 0.02em;
     padding: 24px 0;
     display: block;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .navigation-tel:hover,
 .navigation-tel:focus {
@@ -162,6 +181,7 @@ img {
     line-height: 1.5;
     letter-spacing: 0.04em;
     padding: 16px 32px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
     
 }
 .order-service-button:hover,
@@ -298,6 +318,7 @@ img {
     justify-content: center;
     background-color: var(--color-button-logo);
     border-radius: 50%;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .socials-link:hover,
 .socials-link:focus {
@@ -330,7 +351,7 @@ img {
     border: 1px solid var(--color-icon-customers);
     border-radius: 4px;
     color: var(--color-icon-customers);
-    
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .customers-icon {
     width: 104px;
@@ -394,6 +415,7 @@ img {
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.1);;
     border-radius: 50%;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-socials-link:hover,
@@ -433,7 +455,8 @@ img {
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 0.04em;
-    padding: 12px 24px;    
+    padding: 12px 24px;
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .button:hover,
 .button:focus {
@@ -454,6 +477,7 @@ img {
 .link-card {
     text-decoration: none;
     display: block;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .link-card:hover,
 .link-card:focus {
@@ -478,4 +502,86 @@ img {
     padding: 32px 16px;
     border: 1px solid var(--color-footer-text-and-button-border);
     border-top: none;
+}
+.box-overlay {
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--color-button-logo-light);
+    padding: 40px 32px;
+    background-color: var(--color-button-logo)
+}
+.link-card:hover .overlay {
+    transform: translateY(0);
+}
+/* Modal */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 47, 66, 0.4);
+    transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1), visibility 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.backdrop.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.modal {
+    position: relative;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    max-width: 408px;
+    max-height: 576px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-modal);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.backdrop.is-hidden .modal {
+    transform: scale(0);
+}
+.modal-close {
+    position: absolute;
+    cursor: pointer;
+    top: 24px;
+    right: 24px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-footer-text-and-button-border);
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-close:hover, .modal-close:focus {    
+    color: var(--color-light);
+    background-color: var(--color-button-action);
+}
+
+.close-icon {
+    width: 8px;
+    height: 8px;
+    fill: currentColor;
 }
